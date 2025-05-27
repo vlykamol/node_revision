@@ -1,9 +1,16 @@
 const http = require('http')
+const fs = require("fs");
+const { json } = require('stream/consumers');
+
+
 
 const server = http.createServer( (req, res) => {
-  console.log("new req received.")
+  
+  const log = `${Date.now()}: ${req.url} New req received \n`;
+  fs.appendFile("log.txt", log, (err, data) => {
+    res.end("Hello from server");
+  })
 
-  res.end("Hello from server");
 });
 
 
